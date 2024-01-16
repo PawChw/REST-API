@@ -18,8 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('chwalczyk/310496/people', [\App\Http\Controllers\PeopleController::class, 'index']);
-Route::post('chwalczyk/310496/people', [\App\Http\Controllers\PeopleController::class, 'create']);
-Route::get('chwalczyk/310496/people/{id}', [\App\Http\Controllers\PeopleController::class, 'read']);
-Route::put('chwalczyk/310496/people/{id}', [\App\Http\Controllers\PeopleController::class, 'update']);
-Route::delete('chwalczyk/310496/people/{id}', [\App\Http\Controllers\PeopleController::class, 'remove']);
+Route::prefix('chwalczyk/310496')->group(function(){
+    Route::get('people', [\App\Http\Controllers\PeopleController::class, 'index']);
+    Route::post('people', [\App\Http\Controllers\PeopleController::class, 'create']);
+    Route::get('people/{id}', [\App\Http\Controllers\PeopleController::class, 'read']);
+    Route::put('people/{id}', [\App\Http\Controllers\PeopleController::class, 'update']);
+    Route::delete('people/{id}', [\App\Http\Controllers\PeopleController::class, 'remove']);
+});
