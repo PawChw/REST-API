@@ -9,8 +9,7 @@ class PeopleController extends Controller
 {
 
     public function index(){
-        $items = People::all()->map(function (People $person){return $person->id;});
-        return response()->json($items);
+        return response()->json(People::all());
     }
     public function create(Request $request)
     {
@@ -28,8 +27,7 @@ class PeopleController extends Controller
     }
 
     public function read(Request $request){
-        $items = People::findOrFail($request->id);
-        return response()->json($items);
+        return response()->json(People::findOrFail($request->id));
     }
     public function update(Request $request){
         $item = People::findOrFail($request->id);
