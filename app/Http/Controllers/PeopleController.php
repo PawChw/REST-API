@@ -23,9 +23,11 @@ class PeopleController extends Controller
             'city' => 'string|required',
             'country' => 'string|required'
         ]);
+
         if($validator->fails()){
             return response()->json($validator->messages(), 400);
         }
+
         $item = new People();
         $item->name=$request->name;
         $item->lastName=$request->lastName;
@@ -33,7 +35,6 @@ class PeopleController extends Controller
         $item->street=$request->street;
         $item->city=$request->city;
         $item->country=$request->country;
-
 
         $item->save();
 
@@ -46,8 +47,7 @@ class PeopleController extends Controller
     }
     public function update(Request $request, string $id): \Illuminate\Http\JsonResponse
     {
-        $item = People::findOrFail($id)->update($request->all());
-
+        People::findOrFail($id)->update($request->all());
         return response()->json('Person updated successfully');
     }
     public function remove( string $id): \Illuminate\Http\JsonResponse
