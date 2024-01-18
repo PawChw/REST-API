@@ -23,5 +23,5 @@ Route::prefix('chwalczyk/310496')->group(function(){
     Route::post('people', [\App\Http\Controllers\PeopleController::class, 'create']);
     Route::get('people/{id}', [\App\Http\Controllers\PeopleController::class, 'read']);
     Route::put('people/{id}', [\App\Http\Controllers\PeopleController::class, 'update']);
-    Route::delete('people/{id}', [\App\Http\Controllers\PeopleController::class, 'remove']);
+    Route::delete('people/{id}', [\App\Http\Controllers\PeopleController::class, 'delete']);
 });

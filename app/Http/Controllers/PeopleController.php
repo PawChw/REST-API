@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PeopleController extends Controller
 {
-
     public function index(): \Illuminate\Http\JsonResponse
     {
         return response()->json(People::all());
@@ -40,7 +39,6 @@ class PeopleController extends Controller
 
         return response()->json('Person created successfully', 201);
     }
-
     public function read(string $id): \Illuminate\Http\JsonResponse
     {
         return response()->json(People::findOrFail($id));
@@ -50,7 +48,7 @@ class PeopleController extends Controller
         People::findOrFail($id)->update($request->all());
         return response()->json('Person updated successfully');
     }
-    public function remove( string $id): \Illuminate\Http\JsonResponse
+    public function delete(string $id): \Illuminate\Http\JsonResponse
     {
         People::findOrFail($id)->delete();
         return response()->json('Person removed successfully');
