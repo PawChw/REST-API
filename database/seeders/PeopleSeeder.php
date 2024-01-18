@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\People;
+use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +14,6 @@ class PeopleSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        People::factory()->count(200)->create();
     }
 }
