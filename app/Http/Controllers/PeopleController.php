@@ -34,7 +34,6 @@ class PeopleController extends Controller
         $item->street=$request->street;
         $item->city=$request->city;
         $item->country=$request->country;
-
         $item->save();
 
         return response()->json('Person created successfully', 201);
