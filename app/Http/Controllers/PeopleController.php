@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 class PeopleController extends Controller
 {
 
-    public function index(){
+    public function index(): \Illuminate\Http\JsonResponse
+    {
         return response()->json(People::all());
     }
-    public function create(Request $request)
+    public function create(Request $request): \Illuminate\Http\JsonResponse
     {
         $validator = Validator::make($request->all(),[
             'name' => 'string|required',
@@ -36,39 +37,22 @@ class PeopleController extends Controller
 
         $item->save();
 
-        return response()->json('Created successfully', 201);
+        return response()->json('Person created successfully', 201);
     }
 
-    public function read(string $id){
+    public function read(string $id): \Illuminate\Http\JsonResponse
+    {
         return response()->json(People::findOrFail($id));
     }
-    public function update(Request $request, string $id){
-        $validator = Validator::make($request->all(),[
-            'name' => 'string|nullable',
-            'lastName' => 'string|nullable',
-            'phoneNumber' => 'string|nullable',
-            'street' => 'string|nullable',
-            'city' => 'string|nullable',
-            'country' => 'string|nullable'
-        ]);
-        if($validator->fails()){
-            return response()->json($validator->messages(), 400);
-        }
-        $item = People::findOrFail($id);
-        $item->name=$request->name ?? $item->name;
-        $item->lastName=$request->lastName ?? $item->lastName;
-        $item->phoneNumber=$request->phoneNumber ?? $item->phoneNumber;
-        $item->street=$request->street ?? $item->street;
-        $item->city=$request->city ?? $item->city;
-        $item->country=$request->country ?? $item->country;
+    public function update(Request $request, string $id): \Illuminate\Http\JsonResponse
+    {
+        $item = People::findOrFail($id)->update($request->all());
 
-        $item->update();
-
-        return response()->json('Updated successfully');
+        return response()->json('Person updated successfully');
     }
-    public function remove( string $id){
-        $item = People::findOrFail($id)->delete();
-
-        return response()->json('Removed successfully');
+    public function remove( string $id): \Illuminate\Http\JsonResponse
+    {
+        People::findOrFail($id)->delete();
+        return response()->json('Person removed successfully');
     }
 }
